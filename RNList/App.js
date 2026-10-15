@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet, Text, View,ScrollView } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import { Platform, StyleSheet, Text, View,ScrollView,StatusBar } from 'react-native';
 import  PokemonList from './data.json';
 
 import { SafeAreaProvider,SafeAreaView } from 'react-native-safe-area-context';
