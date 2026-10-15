@@ -1,12 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View,ScrollView } from 'react-native';
+import  PokemonList from './data.json';
 
+import { SafeAreaProvider,SafeAreaView } from 'react-native-safe-area-context';
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  <SafeAreaProvider style={styles.container}>
+    <SafeAreaView style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+        {PokemonList.map((pokemon) => {
+        return (
+          <View key={pokemon.id}>
+            <Text>{pokemon.name}</Text>
+            <Text>{pokemon.type}</Text>
+            <Text>{pokemon.hp}</Text>
+          </View>
+        );
+        })}
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
