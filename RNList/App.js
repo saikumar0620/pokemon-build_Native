@@ -23,7 +23,7 @@ export default function App() {
         <FlatList
           data={PokemonList}
           renderItem={({ item }) => {
-            console.log(item.id);
+            // console.log(item.id);
             return (
               <View key={item.id} style={styles.card}>
                 <Text style={styles.cardText}>{item.name}</Text>
@@ -33,6 +33,7 @@ export default function App() {
             );
           }}
           keyExtractor={(item) => item.id.toString()}
+          itemSeparatorComponent={() => <View style={{ height: 16 }} />}  
         />
 
       </SafeAreaView>
@@ -71,6 +72,6 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 8,
+    // marginBottom: 8,
   },
 });
