@@ -1,6 +1,31 @@
 import { View, Text, StyleSheet, Platform, Image } from 'react-native'
 import React from 'react'
 
+const getTypeDetails = (type) => { 
+  switch (type.toLowerCase()) {
+    case 'fire':
+      return { borderColor: '#F08030', textColor: '#fff',emoji: '🔥' }
+    case 'water':
+      return { borderColor: '#6890F0', textColor: '#fff',emoji: '💧' }
+    case 'grass':
+      return { borderColor: '#78C850', textColor: '#fff',emoji: '🌱' }
+    case 'electric':
+      return { borderColor: '#F8D030', textColor: '#000',emoji: '⚡' }
+    case 'psychic':
+      return { borderColor: '#F85888', textColor: '#fff',emoji: '🔮' }
+    case 'ice':
+      return { borderColor: '#98D8D8', textColor: '#000',emoji: '❄️' }
+    case 'dragon':
+      return { borderColor: '#7038F8', textColor: '#fff',emoji: '🐉' }
+    case 'dark':
+      return { borderColor: '#705848', textColor: '#fff',emoji: '🌑' }
+    case 'fairy':
+      return { borderColor  : '#EE99AC', textColor: '#000',emoji: '🧚' }
+    default:
+      return { borderColor: '#A8A878', textColor: '#fff',emoji: '❓' } 
+  }
+}
+
 export default function PokemonCard({ 
   name, 
   type, 
@@ -24,7 +49,9 @@ export default function PokemonCard({
       />
       
       <View style={styles.typeContainer}>
-        <Text style={styles.typeBadge}>{type}</Text>
+        <Text style={styles.typeBadge}>
+          {getTypeDetails(type).emoji} {type}
+          </Text>
       </View>
 
       <View style={styles.sectionContainer}>
@@ -87,7 +114,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   typeBadge: {
-    backgroundColor: '#edf2f7',
+    borderColor: '#edf2f7',
+    borderWidth: 1, 
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 16,
