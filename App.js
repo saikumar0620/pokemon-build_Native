@@ -11,7 +11,7 @@ export default function App() {
       image: require('./assets/charmander.png'),
       hp: 39,
       moves: ["Scratch", "Ember", "Growl", "Smokescreen"],
-      weeknesses: ["Water", "Ground", "Rock"],
+      weaknesses: ["Water", "Ground", "Rock"],
     }
   return (
     <SafeAreaProvider style={styles.container}>
