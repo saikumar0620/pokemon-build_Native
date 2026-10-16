@@ -67,10 +67,7 @@ export default function App() {
             <Text style={styles.renderSectionHeader}>{ section.type}</Text>
           )}
             sectionSeparatorComponent={() => <View style={{ height: 16 }} />}
-
         />
-
-        
       </SafeAreaView>
     </SafeAreaProvider>
   )
