@@ -8,7 +8,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <TextInput style={styles.input} value={name} onChange={setName} />
+        <TextInput style={styles.input} value={name} onChangeText={setName} />
         <Text> my name is{ name}</Text>
         <Button title="submit" />
       
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   input: {
-    height: 40,
-    margin: 12,
-    padding:15,
+    height: 50,
+    margin: 10,
+    padding:5,
     borderColor: "red",
     borderWidth: 1,
   //  borderRadius: 
