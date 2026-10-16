@@ -1,20 +1,35 @@
+import { useState } from "react";
+import { Button } from "react-native";
+import { StyleSheet, Text, View, StatusBar,TextInput } from "react-native";
 
-import { StyleSheet, Text, View,StatusBar } from 'react-native';
-
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 export default function App() {
+  const [name, setName] = useState("");
   return (
-    <View style={styles.container}>
-      <Text>FORMS IN RN</Text>
-
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <TextInput style={styles.input} value={name} onChange={setName} />
+        <Text> my name is{ name}</Text>
+        <Button title="submit" />
+      
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    backgroundColor: "#fff",
+    // alignItems: "center",
+    justifyContent: "center",
   },
+  input: {
+    height: 40,
+    margin: 12,
+    padding:15,
+    borderColor: "red",
+    borderWidth: 1,
+  //  borderRadius: 
+  }
 });
