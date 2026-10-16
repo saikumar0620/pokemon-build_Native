@@ -8,7 +8,24 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <TextInput style={styles.input} value={name} onChangeText={setName} />
+        <TextInput style={styles.input}
+          value={name}
+          onChangeText={setName}
+          // secureTextEntry
+          // keyboardType="number-pad"
+          autoCorrect={false}
+          autoCapitalize="none"
+        
+        />
+         <TextInput style={[styles.input, styles.multilineInput]}
+          value={name}
+          onChangeText={setName}
+          // secureTextEntry
+          // keyboardType="number-pad"
+          autoCorrect={false}
+          autoCapitalize="none"
+        
+        />
         <Text> my name is{ name}</Text>
         <Button title="submit" />
       
@@ -31,5 +48,9 @@ const styles = StyleSheet.create({
     borderColor: "red",
     borderWidth: 1,
   //  borderRadius: 
+  },
+  multilineInput: {
+    minHeight: 100,
+    
   }
 });
