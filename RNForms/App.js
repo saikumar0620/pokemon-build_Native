@@ -16,9 +16,24 @@ export default function App() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [isDarkMode, setDarkMode] = useState(false);
+  const [errors, setErrors] = useState({})
+  
+  const validateForm=() => {
+    let errors = {}
+    if(!name)errors.name="user name is required"
+    if (!password) errors.password = "password  is required"
+    
+    setErrors(errors)
+    return Object.keys(errors).length === 0;
+  }
 
   const handleSubmit = () => {
-    console.log("Submitted:", { name, password, isDarkMode });
+    if (validateForm()) {
+      console.log("Submitted:", { name, password });
+      setName("")
+      setPassword("")
+      setErrors({})
+    }
   };
 
   // Dynamic styles based on theme toggling
@@ -62,6 +77,9 @@ export default function App() {
               onChangeText={setName}
               autoCapitalize="none"
             />
+            {
+              errors.name ? (<Text style={styles.errorText}>{ errors.name}</Text>):null
+            }
 
             <Text style={[styles.label, themeText]}>Password</Text>
             <TextInput
@@ -73,6 +91,9 @@ export default function App() {
               onChangeText={setPassword}
               autoCapitalize="none"
             />
+            {
+              errors.password ?( <Text style={styles.errorText}>{ errors.password}</Text>):null
+            }
 
             {/* Custom Styled Button */}
             <TouchableOpacity style={styles.button} onPress={handleSubmit} activeOpacity={0.8}>
@@ -182,4 +203,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
   },
+  errorText: {
+    color: "red",
+    marginBottom:10
+  }
 });
