@@ -39,7 +39,7 @@ export default function App() {
           ListHeaderComponent={<Text style={styles.headerText} > Lists</Text>}
           ListFooterComponent={<Text style={styles.footerText}> List is end</Text>}
         />
-          
+        
           
         </View>
       </SafeAreaView>
