@@ -1,5 +1,5 @@
 
-import {StatusBar,StyleSheet,Text,View } from 'react-native';
+import {StatusBar,StyleSheet,Text,View ,FlatList} from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useState , useEffect} from 'react';
 
@@ -17,15 +17,24 @@ export default function App() {
   }, []);
 
 
-  
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.listContainer}>
-          <Text>dbsa</Text>
-
-        </View>
-
+          <FlatList
+            data={postList}
+            renderItem={({ item }) => {
+              return (
+                <View>
+                  <Text>{ item.title}</Text>
+                  <Text>{ item.body}</Text>
+                  <View />
+              )
+            }}
+               </View>
+                />
+                </View>
       </SafeAreaView>
     </SafeAreaProvider>
    
