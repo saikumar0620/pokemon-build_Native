@@ -35,15 +35,15 @@ export default function App() {
   //           );
   //         }}
   //         keyExtractor={(item) => item.id.toString()}
-  //         itemSeparatorComponent={() => <View style={{ height: 16 }} />}
-  //         listEmptyComponent={() => (
-  //           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  //             <Text>No data available</Text>
-  //           </View>
-  //         )}
-  //         ListHeaderComponent={<Text style={styles.headerText} > Pokemon List</Text>}
-  //         ListFooterComponent={<Text style={styles.footerText}> List is end</Text>}
-  //       />
+        //   itemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        //   listEmptyComponent={() => (
+        //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        //       <Text>No data available</Text>
+        //     </View>
+        //   )}
+        //   ListHeaderComponent={<Text style={styles.headerText} > Pokemon List</Text>}
+        //   ListFooterComponent={<Text style={styles.footerText}> List is end</Text>}
+        // />
 
   //     </SafeAreaView>
   //   </SafeAreaProvider>
