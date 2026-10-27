@@ -1,20 +1,28 @@
 
-import {StatusBar,StyleSheet,View } from 'react-native';
+import {StatusBar,StyleSheet,Text,View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 
 export default function App() {
   const [postList,setPostList]=useState([])
-  const fetchdat = async () => {
-    const resonse = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=12`)
-    const data= await resonse.json()
-    
+  const fetchdata = async (limit = 10) => {
+    const resonse = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`)
+    const data = await resonse.json()
+    setPostList(data)
+
   }
+
+  useEffect(() => {
+    fetchdata()
+  }, []);
+
+
+  
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View style={styles.listContainer}>
-          <Text></Text>
+          <Text>dbsa</Text>
 
         </View>
 
@@ -28,7 +36,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    paddingTop:StatusBar.currentHeight
+    paddingTop: StatusBar.currentHeight,
+    alignItems:"center"
 
   },
   listContainer: {
