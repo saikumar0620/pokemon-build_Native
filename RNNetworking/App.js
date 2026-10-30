@@ -19,7 +19,7 @@ export default function App() {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [isPosting, setisPosting] = useState(false);
-  const [error, setError] = useState("false");
+  const [error, setError] = useState(false);
 
   const fetchdata = async (limit = 10) => {
     try {
@@ -30,7 +30,7 @@ export default function App() {
       setPostList(data);
       setIsLoading(false);
     } catch (error) {
-      console.log("error fetching data:",error);
+      console.error("error fetching data:",error);
       setIsLoading(false);
       setError("failed to fetch post list");
     }
@@ -60,6 +60,7 @@ export default function App() {
       setPostTitle("");
       setPostBody("");
       setisPosting(false);
+      setError("")
     } catch (error) {
       console.error("error adding new post",error)
     }
@@ -81,63 +82,68 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="post title"
-              value={postTitle}
-              onChangeText={setPostTitle}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="post body"
-              value={postBody}
-              onChangeText={setPostBody}
-            />
-            <Button
-              title={isPosting ? "Adding..." : "Add post"}
-              onPress={addPost}
-              disabled={isPosting}
-            />
+        {error ? (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{error}</Text>
           </View>
-          <View style={styles.listContainer}>
-            <FlatList
-              data={postList}
-              renderItem={({ item }) => {
-                return (
-                  <View style={styles.card}>
-                    <Text style={styles.titleText}>{item.title}</Text>
-                    <Text style={styles.bodyText}>{item.body}</Text>
+        ) : (
+          <>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="post title"
+                value={postTitle}
+                onChangeText={setPostTitle}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="post body"
+                value={postBody}
+                onChangeText={setPostBody}
+              />
+              <Button
+                title={isPosting ? "Adding..." : "Add post"}
+                onPress={addPost}
+                disabled={isPosting}
+              />
+            </View>
+            <View style={styles.listContainer}>
+              <FlatList
+                data={postList}
+                renderItem={({ item }) => {
+                  return (
+                    <View style={styles.card}>
+                      <Text style={styles.titleText}>{item.title}</Text>
+                      <Text style={styles.bodyText}>{item.body}</Text>
+                    </View>
+                  );
+                }}
+                itemSeparatorComponent={() => <View style={{ height: 16 }} />}
+                listEmptyComponent={() => (
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text>No data available</Text>
                   </View>
-                );
-              }}
-              itemSeparatorComponent={() => <View style={{ height: 16 }} />}
-              listEmptyComponent={() => (
-                <View
-                  style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text>No data available</Text>
-                </View>
-              )}
-              ListEmptyComponent={
-                <Text style={styles.emptyList}> no lists found</Text>
-              }
-              ListHeaderComponent={
-                <Text style={styles.headerText}> Lists</Text>
-              }
-              ListFooterComponent={
-                <Text style={styles.footerText}> List is end</Text>
-              }
-              refreshing={refreshing}
-              onRefresh={handleRefresh}
-            />
-          </View>
-        </>
+                )}
+                ListEmptyComponent={
+                  <Text style={styles.emptyList}> no lists found</Text>
+                }
+                ListHeaderComponent={
+                  <Text style={styles.headerText}> Lists</Text>
+                }
+                ListFooterComponent={
+                  <Text style={styles.footerText}> List is end</Text>
+                }
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+              />
+            </View>
+          </>)}
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -245,5 +251,36 @@ const styles = StyleSheet.create({
     minHeight: 96,
     textAlignVertical: "top", // Critical for Android multiline
     paddingTop: 12,
+  },
+  errorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF2F2', // Soft red-50 tint
+    borderWidth: 1,
+    borderColor: '#FECACA', // Crisp red-200 border
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginHorizontal: 16,
+    marginVertical: 8,
+    gap: 10,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#EF4444',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 1,
+      },
+    }),
+  },
+  errorText: {
+    flex: 1, // Allows long errors to wrap cleanly without overflowing
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '500',
+    color: '#B91C1C', // Dark legible red-700
   },
 });
