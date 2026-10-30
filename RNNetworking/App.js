@@ -1,20 +1,31 @@
-import { StatusBar, StyleSheet, Text, View, FlatList } from "react-native";
+import { StatusBar, StyleSheet, Text, View, FlatList,ActivityIndicator } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useState, useEffect } from "react";
 
 export default function App() {
   const [postList, setPostList] = useState([]);
+  const [isLoading,setIsLoading]= useState(true)
   const fetchdata = async (limit = 10) => {
     const resonse = await fetch(
       `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`,
     );
     const data = await resonse.json();
     setPostList(data);
+    setIsLoading(false)
   };
 
   useEffect(() => {
     fetchdata();
   }, []);
+
+  if (isLoading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="red" />
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    )
+  }
 
   return (
     <SafeAreaProvider>
@@ -102,5 +113,11 @@ bodyText: {
     textAlign: 'center',
      borderWidth: 1,
   borderRadius: 10
+  },
+  loadingContainer: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    justifyContent: "center",
+    alignItems:"center"
   }
 });
