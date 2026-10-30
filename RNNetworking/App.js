@@ -14,6 +14,11 @@ export default function App() {
     setPostList(data);
     setIsLoading(false)
   };
+  const handleRefresh = () => {
+    setRefreshing(true);
+    fetchdata(20);
+    setRefreshing(false)
+  }
 
   useEffect(() => {
     fetchdata();
@@ -27,6 +32,8 @@ export default function App() {
       </SafeAreaView>
     )
   }
+
+  
 
   return (
     <SafeAreaProvider>
@@ -50,7 +57,9 @@ export default function App() {
           )}
             ListEmptyComponent={<Text style={styles.emptyList}> no lists found</Text>}
           ListHeaderComponent={<Text style={styles.headerText} > Lists</Text>}
-          ListFooterComponent={<Text style={styles.footerText}> List is end</Text>}
+            ListFooterComponent={<Text style={styles.footerText}> List is end</Text>}
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
         />
           
         </View>
