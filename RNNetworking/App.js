@@ -19,13 +19,21 @@ export default function App() {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [isPosting, setisPosting] = useState(false);
+  const [error, setError] = useState("false");
+
   const fetchdata = async (limit = 10) => {
-    const resonse = await fetch(
-      `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`,
-    );
-    const data = await resonse.json();
-    setPostList(data);
-    setIsLoading(false);
+    try {
+      const resonse = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`,
+      );
+      const data = await resonse.json();
+      setPostList(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log("error fetching data:",error);
+      setIsLoading(false);
+      setError("failed to fetch post list");
+    }
   };
   const handleRefresh = () => {
     setRefreshing(true);
@@ -34,20 +42,27 @@ export default function App() {
   };
 
   const addPost = async () => {
-    setisPosting(true);
-    const response = await fetch("https://jsonplaceholder.typicode./posts", {
-      method: "post",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        title: postTitle,
-        body: postBody,
-      }),
-    });
-    const newPost = await response.json();
-    setPostList([newPost, ...postList]);
-    setPostTitle("");
-    setPostBody("");
-    setisPosting(false);
+    try {
+      setisPosting(true);
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts",
+        {
+          method: "post",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            title: postTitle,
+            body: postBody,
+          }),
+        },
+      );
+      const newPost = await response.json();
+      setPostList([newPost, ...postList]);
+      setPostTitle("");
+      setPostBody("");
+      setisPosting(false);
+    } catch (error) {
+      console.error("error adding new post",error)
+    }
   };
 
   useEffect(() => {
@@ -82,7 +97,7 @@ export default function App() {
             />
             <Button
               title={isPosting ? "Adding..." : "Add post"}
-              // onPress={addPost}
+              onPress={addPost}
               disabled={isPosting}
             />
           </View>
