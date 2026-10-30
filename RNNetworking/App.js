@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 
 export default function App() {
   const [postList, setPostList] = useState([]);
-  const [isLoading,setIsLoading]= useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+  const [refreshing,setRefreshing]= useState(false)
   const fetchdata = async (limit = 10) => {
     const resonse = await fetch(
       `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`,
@@ -47,6 +48,7 @@ export default function App() {
               <Text>No data available</Text>
             </View>
           )}
+            ListEmptyComponent={<Text style={styles.emptyList}> no lists found</Text>}
           ListHeaderComponent={<Text style={styles.headerText} > Lists</Text>}
           ListFooterComponent={<Text style={styles.footerText}> List is end</Text>}
         />
@@ -109,6 +111,12 @@ bodyText: {
     
   },
   footerText: {
+     fontSize: 25,
+    textAlign: 'center',
+     borderWidth: 1,
+  borderRadius: 10
+  },
+  emptyList: {
      fontSize: 25,
     textAlign: 'center',
      borderWidth: 1,
