@@ -1,25 +1,24 @@
-import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import DashBoardScreen from "./screens/DashBoardScreen";
-import SettingsScreen from "./screens/SettingsScreen";
-const Drawer = createDrawerNavigator();
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+const Tab = createBottomTabNavigator()
+
+import { View, Text } from 'react-native'
+import React from 'react'
+import DashBoardScreen from './screens/DashBoardScreen'
+import ProfileScreen from './screens/ProfileScreen'
+import CourseListScreen from './screens/CourseListScreen'
+import SettingsScreen from './screens/SettingsScreen'
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Dashboard">
-        <Drawer.Screen
-          name="Dashboard"
-          component={DashBoardScreen}
-          options={{ title: "Dashboard" , drawerLabel: "My Dashboard" }}
-        />
-        <Drawer.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{ title: "Settings" , drawerLabel: "Settings" }}
-        />
-      </Drawer.Navigator>
+      <Tab.Navigator>
+        {/* <Tab.Screen name="Dashboard" component={DashBoardScreen} />  */}
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Course List" component={CourseListScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
-  );
+  )
 }
