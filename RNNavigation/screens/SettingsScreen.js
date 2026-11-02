@@ -4,8 +4,6 @@ const SettingsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>SettingsScreen</Text>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-      <Button title="Dashboard" onPress={() => navigation.jumpTo("Dashboard")} />
     </View>
   );
 };
