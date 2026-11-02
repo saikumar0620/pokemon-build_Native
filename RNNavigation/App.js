@@ -7,6 +7,7 @@ import { Pressable, Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
+  
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -47,9 +48,9 @@ export default function App() {
           name="About"
           component={AboutScreen}
           initialParams={{ name: "Hello, guest!" }}
-          options={({ route }) => ({
-            title: route.params?.name ?? "WelcomeHome",
-          })}
+          // options={({ route }) => ({
+          //   title: route.params?.name ?? "WelcomeHome",
+          // })}
         />
       </Stack.Navigator>
     </NavigationContainer>
