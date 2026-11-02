@@ -9,7 +9,7 @@ export default function HomeScreen({ route }) {
     <View style={styles.container}>
       <Text style={styles.text}>HomeScreen</Text>
       <Text style={styles.text}>{route.params?.result || 'No data received'}</Text>
-      <Button title='Go to About' onPress={() => navigation.navigate("About")}/>
+      <Button title='Go to About' onPress={() => navigation.navigate("About",{name: route.params?.name || 'Guest'})}/>
     </View>
   )
 }
